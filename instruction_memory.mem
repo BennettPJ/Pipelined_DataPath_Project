@@ -1,0 +1,69 @@
+34040000	//	main:		ori	$a0, $zero, 0 ->	main:		ori	$a0, $zero, 0
+34050010	//			ori	$a1, $zero, 16 ->			ori	$a1, $zero, 16
+34064010	//			ori	$a2, $zero, 16400 ->			ori	$a2, $zero, 16400
+0c000006	//			jal	vbsme ->			jal	vbsme
+08000005	//			j	end_program ->			j	end_program
+08000005	//	end_program:	j	end_program ->	end_program:	j	end_program
+8c8e000c	//	vbsme:		lw	$t6, 12($a0) ->	vbsme:		lw	$t6, 12($a0)
+8c8f0008	//			lw	$t7, 8($a0) ->			lw	$t7, 8($a0)
+8c980004	//			lw	$t8, 4($a0) ->			lw	$t8, 4($a0)
+8c990000	//			lw	$t9, 0($a0) ->			lw	$t9, 0($a0)
+21efffff	//			addi	$t7, $t7, -1 ->			addi	$t7, $t7, -1
+21ceffff	//			addi	$t6, $t6, -1 ->			addi	$t6, $t6, -1
+23f70000	//			addi	$s7, $ra, 0 ->			addi	$s7, $ra, 0
+032f8822	//			sub	$s1, $t9, $t7 ->			sub	$s1, $t9, $t7
+20142710	//			addi	$s4, $zero, 10000 ->			addi	$s4, $zero, 10000
+030e8022	//			sub	$s0, $t8, $t6 ->			sub	$s0, $t8, $t6
+26330007	//	FORLOOPY:	addiu	$s3, $s1, EXIT ->	FORLOOPY:	addiu	$s3, $s1, EXIT
+26120003	//	FORLOOPX:	addiu	$s2, $s0, EXITLOOPX ->	FORLOOPX:	addiu	$s2, $s0, EXITLOOPX
+0c000019	//			jal	STARTOFSAD ->			jal	STARTOFSAD
+22520001	//			addi	$s2, $s2, 1 ->			addi	$s2, $s2, 1
+08000011	//			j	FORLOOPX ->			j	FORLOOPX
+22730001	//	EXITLOOPX:	addi	$s3, $s3, 1 ->	EXITLOOPX:	addi	$s3, $s3, 1
+20120000	//			addi	$s2, $zero, 0 ->			addi	$s2, $zero, 0
+08000010	//			j	FORLOOPY ->			j	FORLOOPY
+02e00008	//	EXIT:		jr	$s7 ->	EXIT:		jr	$s7
+8c8f0008	//	STARTOFSAD:	lw	$t7, 8($a0) ->	STARTOFSAD:	lw	$t7, 8($a0)
+00137020	//			add	$t6, $zero, $s3 ->			add	$t6, $zero, $s3
+0000c020	//			add	$t8, $zero, $zero ->			add	$t8, $zero, $zero
+01cf5820	//			add	$t3, $t6, $t7 ->			add	$t3, $t6, $t7
+256e0020	//	SADYLOOP:	addiu	$t6, $t3, EXITSADYLOOP ->	SADYLOOP:	addiu	$t6, $t3, EXITSADYLOOP
+8c8f000c	//			lw	$t7, 12($a0) ->			lw	$t7, 12($a0)
+00126820	//			add	$t5, $zero, $s2 ->			add	$t5, $zero, $s2
+01af6020	//			add	$t4, $t5, $t7 ->			add	$t4, $t5, $t7
+258d001a	//	SADXLOOP:	addiu	$t5, $t4, EXITSADXLOOP ->	SADXLOOP:	addiu	$t5, $t4, EXITSADXLOOP
+8c8f0004	//			lw	$t7, 4($a0) ->			lw	$t7, 4($a0)
+71cf4802	//			mul	$t1, $t6, $t7 ->			mul	$t1, $t6, $t7
+012d4820	//			add	$t1, $t1, $t5 ->			add	$t1, $t1, $t5
+00094880	//			sll	$t1, $t1, 2 ->			sll	$t1, $t1, 2
+01254820	//			add	$t1, $t1, $a1 ->			add	$t1, $t1, $a1
+8d350000	//			lw	$s5, 0($t1) ->			lw	$s5, 0($t1)
+8c8f000c	//			lw	$t7, 12($a0) ->			lw	$t7, 12($a0)
+01d3b022	//			sub	$s6, $t6, $s3 ->			sub	$s6, $t6, $s3
+01b24022	//			sub	$t0, $t5, $s2 ->			sub	$t0, $t5, $s2
+72cf4802	//			mul	$t1, $s6, $t7 ->			mul	$t1, $s6, $t7
+01284820	//			add	$t1, $t1, $t0 ->			add	$t1, $t1, $t0
+00094880	//			sll	$t1, $t1, 2 ->			sll	$t1, $t1, 2
+0126b020	//			add	$s6, $t1, $a2 ->			add	$s6, $t1, $a2
+8ed60000	//			lw	$s6, 0($s6) ->			lw	$s6, 0($s6)
+02d54822	//			sub	$t1, $s6, $s5 ->			sub	$t1, $s6, $s5
+0120402a	//			slt	$t0, $t1, $zero ->			slt	$t0, $t1, $zero
+15000004	//			bne	$t0, $zero, ABSVALUE ->			bne	$t0, $zero, ABSVALUE
+25200003	//			addiu	$zero, $t1, ABSVALUE ->			addiu	$zero, $t1, ABSVALUE
+0309c020	//			add	$t8, $t8, $t1 ->			add	$t8, $t8, $t1
+21ad0001	//			addi	$t5, $t5, 1 ->			addi	$t5, $t5, 1
+08000021	//			j	SADXLOOP ->			j	SADXLOOP
+2008ffff	//	ABSVALUE:	addi	$t0, $zero, -1 ->	ABSVALUE:	addi	$t0, $zero, -1
+71284802	//			mul	$t1, $t1, $t0 ->			mul	$t1, $t1, $t0
+0309c020	//			add	$t8, $t8, $t1 ->			add	$t8, $t8, $t1
+21ad0001	//			addi	$t5, $t5, 1 ->			addi	$t5, $t5, 1
+08000021	//			j	SADXLOOP ->			j	SADXLOOP
+21ce0001	//	EXITSADXLOOP:	addi	$t6, $t6, 1 ->	EXITSADXLOOP:	addi	$t6, $t6, 1
+0800001d	//			j	SADYLOOP ->			j	SADYLOOP
+13140001	//	EXITSADYLOOP:	beq	$t8, $s4, STORESAD ->	EXITSADYLOOP:	beq	$t8, $s4, STORESAD
+26980004	//			addiu	$t8, $s4, EXITSAD ->			addiu	$t8, $s4, EXITSAD
+0300a020	//	STORESAD:	add	$s4, $t8, $zero ->	STORESAD:	add	$s4, $t8, $zero
+00131020	//			add	$v0, $zero, $s3 ->			add	$v0, $zero, $s3
+00121820	//			add	$v1, $zero, $s2 ->			add	$v1, $zero, $s2
+03e00008	//			jr	$ra ->			jr	$ra
+03e00008	//	EXITSAD:	jr	$ra ->	EXITSAD:	jr	$ra
